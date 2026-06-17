@@ -27,6 +27,12 @@ class chordSorter {
         });
     }
 
+    // returns array of all song items from an artist
+    listSongsByArtist(artistName){
+        return this.songs.filter(song =>
+            song.artist.toLowerCase() === artistName.toLowerCase());
+    }
+
     // given a song title, returns array of missing chords
     missingChords(songTitle){
         // finds the dictionary item belonging to songTitle
@@ -51,8 +57,15 @@ class chordSorter {
     }
 
 
+    // given an artist, list songs where all chords are known
+    // each song as a list [SongTitle, chordsKnown, Chords Unknown]
+    knownByArtist(artistName){
 
-    //orderedByArtist(songs, artistName){}
+    }
+
+    // given an artist, list songs in order of chords known
+    // each song as a list [SongTitle, chordsKnown, Chords Unknown]
+    orderedByArtist(artistName){}
 
 }
 
