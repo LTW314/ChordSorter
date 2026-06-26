@@ -1,23 +1,23 @@
 class chordSorter {
 
+    //songs array of song items, chordsknown a set of chords
     constructor(songs, chordsKnown){
         this.chordsKnown = chordsKnown;
         this.songs = songs;
-        this.sharedChords = [];
-        this.unknownChords = [];
+        this.sharedChords = new Set();
+        this.unknownChords = new Set();
     }
 
 
     //add chord to chords known
     addChordKnown(chord){
-        this.chordsKnown.push(chord);
+        this.chordsKnown.add(chord);
     }
 
     //remove chord from chords known
     removeChordKnown(chordToRemove){
-        this.chordsKnown = this.chordsKnown.filter(function(chord){
-            return chord != chordToRemove;
-    })}
+        this.chordsKnown.delete(chordToRemove);
+    }
 
 
     // returns song item given song title
@@ -60,7 +60,32 @@ class chordSorter {
     // given an artist, list songs where all chords are known
     // each song as a list [SongTitle, chordsKnown, Chords Unknown]
     knownByArtist(artistName){
-
+        const artistArray = listSongsByArtist(artistName);
+        const songsKnown = []
+        // loop through all songs by an artist
+        for (let i = 0; i < listSongsByArtist.length; i++){
+            const hasAllChords = true;
+            // loop through choreds of each song
+            for (let j = 0; j < artistArray[i].chords.length; j++){
+                // mark false if any chords don't match
+                if (!chordsKnown.has(artistArray[i].chords[j])){
+                    hasAllChords = false;
+                }
+                if (hasAllChords = true){
+                    songsKnown.push([]);
+                    // new song slot
+                    const songSlot = songsKnown[songsKnown.length-1];
+                    //title
+                    songSlot.push(artistArray[i].title);
+                    //chords known
+                    songSlot.push([artistArray[i].chords]);
+                    //chords unknown
+                    songSlot.push([]);
+                
+                }
+            }
+        }
+        return songsKnown;
     }
 
     // given an artist, list songs in order of chords known
@@ -69,7 +94,7 @@ class chordSorter {
 
 }
 
-const chordsKnown = ["A", "C", "D", "Am", "G"];
+const chordsKnown = new  Set(["A", "C", "D", "Am", "G"]);
 
 const songs = [{
         title: "Stick Season", 
